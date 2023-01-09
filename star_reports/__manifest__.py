@@ -1,0 +1,22 @@
+{
+    'name': 'Star-Reports',
+    'version': '15.0.1',
+    'category': '',
+    'summary': 'Star-Reports',
+    
+    'author': 'SSL',
+    'website': '',
+    'maintainer': '',
+
+    'depends': ['sale'],
+    'data': [
+    # 'reports/sale_report_templates.xml',
+    # 'reports/purchase_order_templates.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'price': 110.00,
+    'currency': 'EUR',
+    'images': ['static/description/icon.png'],
+    'license': 'AGPL-3',
+}
