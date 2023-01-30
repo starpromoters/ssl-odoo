@@ -11,6 +11,9 @@
             <field name="team_id" position="after">
                 <field name="contact_name"/>
             </field>
+            <field name="payment_term_id" position="after">
+                <field name="p_o_ref"/>
+            </field>
         </field>
     </record>
 

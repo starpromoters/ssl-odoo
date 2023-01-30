@@ -10,7 +10,10 @@
 
     'depends': ['base','sale'],
     'data': [
+        'views/res_company_view.xml',
         'views/sale_view.xml',
+        'views/picking_view.xml',
+        'views/invoice.xml',
         'views/res_partner_view.xml',
  
     ],
