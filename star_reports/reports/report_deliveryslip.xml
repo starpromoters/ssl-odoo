@@ -43,10 +43,14 @@
                         </div>
                     </div>
                 </t>
- -->
-                 <h4>
+ -->            
+                <h3>
+                   <span >Delivery Slip</span>
+                </h3>
+                <br/>
+                <h5>
                     <span t-field="o.name"/>
-                </h4>
+                </h5>
                 <br/>
                 <table  class="table table-bordered" style="table-layout:auto">
                     <tr>
@@ -297,13 +301,26 @@
                         </table>
                     </t>
 
-                    <div t-if="o.signature" class="mt32 ml64 mr4" name="signature">
+                    <!-- <div t-if="o.signature" class="mt32 ml64 mr4 text-center" name="signature">
                         <div class="offset-8">
                             <strong>Signature</strong>
                         </div>
                         <div class="offset-8">
                             <img t-att-src="image_data_uri(o.signature)" style="max-height: 4cm; max-width: 8cm;"/>
                         </div>
+                        <div class="offset-8 text-center">
+                            <p t-field="o.partner_id.name"/>
+                        </div>
+                    </div> -->
+
+                    <div class="mt32 ml64 mr4 text-center" name="signature">
+                        <div class="offset-8">
+                            <strong>Signature</strong>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                         <div class="offset-8 text-center">
                             <p t-field="o.partner_id.name"/>
                         </div>

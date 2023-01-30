@@ -8,12 +8,14 @@
     'website': '',
     'maintainer': '',
 
-    'depends': ['sale','star_extensions'],
+    'depends': ['sale','star_extensions','stock','account'],
     'data': [
     'reports/sale_report.xml',
     'reports/delivery_slip.xml',
+    'reports/account_report.xml',
     'reports/sale_report_templates.xml',
     'reports/report_deliveryslip.xml',
+    'reports/report_invoice.xml',
     ],
     'installable': True,
     'auto_install': False,
