@@ -11,8 +11,9 @@
     'depends': ['sale','star_extensions'],
     'data': [
     'reports/sale_report.xml',
+    'reports/delivery_slip.xml',
     'reports/sale_report_templates.xml',
-    # 'reports/purchase_order_templates.xml',
+    'reports/report_deliveryslip.xml',
     ],
     'installable': True,
     'auto_install': False,

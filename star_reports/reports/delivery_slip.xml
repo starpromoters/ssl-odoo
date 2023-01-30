@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="action_report_saleorder_new" model="ir.actions.report">
+       <!--  <record id="action_report_saleorder_new" model="ir.actions.report">
             <field name="name">SSL Quotation / Order</field>
             <field name="model">sale.order</field>
             <field name="report_type">qweb-pdf</field>
@@ -11,16 +11,16 @@
             <field name="binding_model_id" ref="sale.model_sale_order"/>
             <field name="binding_type">report</field>
         </record>
-        <record id="action_report_pro_forma_invoice_new" model="ir.actions.report">
-            <field name="name">SSL PRO-FORMA Invoice</field>
-            <field name="model">sale.order</field>
+         -->
+        <record id="action_report_delivery_new" model="ir.actions.report">
+            <field name="name">SSL Delivery Slip</field>
+            <field name="model">stock.picking</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">star_reports.report_saleorder_pro_forma_inherit</field>
-            <field name="report_file">star_reports.report_saleorder_pro_forma_inherit</field>
-            <field name="print_report_name">'PRO-FORMA - %s' % (object.name)</field>
-            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="report_name">star_reports.report_deliveryslip_inherit</field>
+            <field name="report_file">star_reports.report_deliveryslip_inherit</field>
+            <field name="print_report_name">'Delivery Slip - %s - %s' % (object.partner_id.name or '', object.name)</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
             <field name="binding_type">report</field>
-            <field name="groups_id" eval="[(4, ref('sale.group_proforma_sales'))]"/>
         </record>
     </data>
 </odoo>
