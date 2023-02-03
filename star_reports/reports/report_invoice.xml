@@ -249,17 +249,9 @@
                             <img class="border border-dark rounded" t-att-src="qr_code_urls[o.id]"/>
                         </p>
                     </div>
-                    <!-- <div class="oe_structure"/>
-                    <p t-field="o.company_id.invoice_terms_cond"/> -->
+                    <div class="oe_structure"/>
+                    <p t-field="o.company_id.invoice_terms_cond"/>
                 </div>
-                <table  class="table">
-                <tr>
-                    <td colspan="6">
-                        <div class="oe_structure"/>
-                        <p t-field="doc.company_id.invoice_terms_cond"/>
-                    </td>
-                    </tr>
-                </table>
             </t>
         </template>
 
