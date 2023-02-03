@@ -199,10 +199,19 @@
                 <span t-field="doc.fiscal_position_id.sudo().note"/>
             </p>
 
-            <div class="oe_structure"/>
-            <p t-field="doc.company_id.sale_terms_cond"/>
-
+            
         </div>
+
+        <table  class="table">
+            <tr>
+                <td colspan="6">
+                    <div class="oe_structure"/>
+                    <p t-field="doc.company_id.sale_terms_cond"/>
+                </td>
+            </tr>
+        </table>
+       
+
     </t>
 </template>
 
