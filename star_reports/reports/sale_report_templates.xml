@@ -29,10 +29,10 @@
             </tr>
             <tr>
                 <td colspan="6" style="border: 1px solid black;padding: 2px;">
-                    <strong>Customer BRN.:<span t-field="doc.partner_id.brn"/></strong>
+                    <strong>Customer BRN:<span t-field="doc.partner_id.brn"/></strong>
                 </td>   
                 <td colspan="6" style="border: 1px solid black;padding: 2px;">
-                   <strong>Customer VAT NO.:<span t-field="doc.partner_id.vat"/></strong>
+                   <strong>Customer VAT NO:<span t-field="doc.partner_id.vat"/></strong>
                 </td>
             </tr>
         </table>
