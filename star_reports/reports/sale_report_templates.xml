@@ -102,7 +102,7 @@
                             <span>Disc.%</span>
                         </th>
                         <th name="th_taxes" class="text-center">VAT</th>
-                        <th name="th_subtotal" class="text-right">
+                        <th name="th_subtotal" class="text-center">
                             <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
                             <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
                         </th>
@@ -131,7 +131,7 @@
                                 <td name="td_taxes" class="text-center">
                                     <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
                                 </td>
-                                <td name="td_subtotal" class="text-right o_price_total">
+                                <td name="td_subtotal" class="text-center o_price_total">
                                     <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                                     <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
                                 </td>
