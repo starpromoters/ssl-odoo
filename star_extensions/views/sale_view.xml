@@ -12,7 +12,7 @@
                 <field name="contact_name"/>
             </field>
             <field name="payment_term_id" position="after">
-                <field name="p_o_ref" required="1"/>
+                <field name="p_o_ref" required="0"/>
             </field>
         </field>
     </record>
