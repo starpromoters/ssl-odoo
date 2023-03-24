@@ -1,6 +1,9 @@
-from odoo import models, fields, api
+from odoo import api, fields, models, SUPERUSER_ID, _
+
 import logging
 _logger = logging.getLogger(__name__)
+from odoo.exceptions import AccessError, UserError, ValidationError
+
 
 
 class SaleOrder(models.Model):
@@ -8,6 +11,15 @@ class SaleOrder(models.Model):
 
     contact_name = fields.Char(string='Contact Name')
     p_o_ref = fields.Char(string='Purchase Order Ref')
+    
+    def action_confirm(self):
+        if not self.p_o_ref:
+            raise UserError(_('Kindly provide the Po Reference.'))
+        res = super(SaleOrder,self).action_confirm()
+        if self.pub_dist_id:
+            self.pub_dist_id.stage_id = self.get_stage_id(state_name='sale_confirmed')
+        return res
+
 
     def _prepare_invoice(self):
         invoice_vals = super(SaleOrder, self)._prepare_invoice()
