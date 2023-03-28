@@ -16,8 +16,6 @@ class SaleOrder(models.Model):
         if not self.p_o_ref:
             raise UserError(_('Kindly provide the Po Reference.'))
         res = super(SaleOrder,self).action_confirm()
-        if self.pub_dist_id:
-            self.pub_dist_id.stage_id = self.get_stage_id(state_name='sale_confirmed')
         return res
 
 
