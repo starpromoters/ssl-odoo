@@ -23,17 +23,15 @@ class AccountFollowupReport(models.AbstractModel):
         headers = [{},
                    {'name': _('Date'), 'class': 'date', 'style': 'text-align:center; white-space:nowrap;'},
                    {'name': _('Due Date'), 'class': 'date', 'style': 'text-align:center; white-space:nowrap;'},
-                   {'name': _('Source Document'), 'style': 'text-align:center; white-space:nowrap;'},
-                   {'name': _('PO Ref'), 'style': 'text-align:center; white-space:nowrap;'},
                    {'name': _('Communication'), 'style': 'text-align:right; white-space:nowrap;'},
+                   {'name': _('Source Document'), 'style': 'text-align:center; white-space:nowrap;'},
                    {'name': _('Expected Date'), 'class': 'date', 'style': 'white-space:nowrap;'},
                    {'name': _('Excluded'), 'class': 'date', 'style': 'white-space:nowrap;'},
+                   {'name': _('Po Reference'),'style': 'text-align:center; white-space:nowrap;'},
                    {'name': _('Total Due'), 'class': 'number o_price_total', 'style': 'text-align:right; white-space:nowrap;'}
                   ]
         if self.env.context.get('print_mode'):
-            headers = headers[:6] + headers[7:]  # Remove the 'Expected Date' and 'Excluded' columns
-
-
+            headers = headers[:5] + headers[7:]  # Remove the 'Expected Date' and 'Excluded' columns
         return headers
 
     def get_po_ref(self,value):
@@ -101,16 +99,15 @@ class AccountFollowupReport(models.AbstractModel):
                 columns = [
                     format_date(self.env, aml.move_id.invoice_date or aml.date, lang_code=lang_code),
                     date_due,
-                    invoice_origin,
-                    po_ref,
                     move_line_name,
+                    invoice_origin,
                     (expected_pay_date and expected_pay_date + ' ') + (aml.internal_note or ''),
                     {'name': '', 'blocked': aml.blocked},
+                    po_ref,
                     amount,
                 ]
                 if self.env.context.get('print_mode'):
-                    columns = columns[:5] + columns[6:]
-
+                    columns = columns[:4] + columns[6:]
                 lines.append({
                     'id': aml.id,
                     'account_move': aml.move_id,
@@ -130,7 +127,7 @@ class AccountFollowupReport(models.AbstractModel):
                 'style': 'border-top-style: double',
                 'unfoldable': False,
                 'level': 3,
-                'columns': [{'name': v} for v in [''] * (5 if self.env.context.get('print_mode') else 6) + [total >= 0 and _('Total Due') or '', total_due]],
+                'columns': [{'name': v} for v in [''] * (4 if self.env.context.get('print_mode') else 6) + [total >= 0 and _('Total Due') or '', total_due]],
             })
             if total_issued > 0:
                 total_issued = formatLang(self.env, total_issued, currency_obj=currency)
@@ -141,7 +138,7 @@ class AccountFollowupReport(models.AbstractModel):
                     'class': 'total',
                     'unfoldable': False,
                     'level': 3,
-                    'columns': [{'name': v} for v in [''] * (5 if self.env.context.get('print_mode') else 6) + [_('Total Overdue'), total_issued]],
+                    'columns': [{'name': v} for v in [''] * (4 if self.env.context.get('print_mode') else 6) + [_('Total Overdue'), total_issued]],
                 })
             # Add an empty line after the total to make a space between two currencies
             line_num += 1
