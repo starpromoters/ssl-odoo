@@ -11,6 +11,7 @@
     'depends': ['base','sale'],
     'data': [
         'views/res_company_view.xml',
+        'views/product.xml',
         'views/sale_view.xml',
         'views/picking_view.xml',
         'views/invoice.xml',
