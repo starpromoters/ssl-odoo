@@ -206,7 +206,8 @@
             <tr>
                 <td colspan="6">
                     <div class="oe_structure"/>
-                    <p t-field="doc.company_id.sale_terms_cond"/>
+                    <!-- <p t-field="doc.company_id.sale_terms_cond"/> -->
+                    <span t-raw="doc.company_id.sale_terms_cond"/>
                 </td>
             </tr>
         </table>

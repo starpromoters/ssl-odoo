@@ -256,7 +256,9 @@
                     <tr>
                         <td colspan="6">
                             <div class="oe_structure"/>
-                            <p t-field="o.company_id.invoice_terms_cond"/>
+                            <!-- <p t-field="o.company_id.invoice_terms_cond"/> -->
+                            <span t-raw="o.company_id.invoice_terms_cond"/>
+                            
                         </td>
                     </tr>
                 </table>
