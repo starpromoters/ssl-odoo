@@ -6,7 +6,17 @@ _logger = logging.getLogger(__name__)
 class Picking(models.Model):
     _inherit = 'stock.picking'
 
+
+    def _compute_is_hide_return(self):
+        for record in self:
+            record.is_hide_return = False
+            print(self.env.user.has_group('star_extensions.group_main_domestic_user'))
+            if record.picking_type_id.code =='outgoing' and self.env.user.has_group('star_extensions.group_main_domestic_user'):
+                record.is_hide_return = True
+
+
     p_o_ref = fields.Char(string='Purchase Order Ref')
+    is_hide_return = fields.Boolean(string="Is Hide Return",compute='_compute_is_hide_return')
 
     def _create_backorder(self):
         """ This method is called when the user chose to create a backorder. It will create a new
