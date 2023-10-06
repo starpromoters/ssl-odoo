@@ -10,6 +10,7 @@
 
     'depends': ['base','sale'],
     'data': [
+        'security/delivery_security.xml',    
         'views/res_company_view.xml',
         'views/product.xml',
         'views/sale_view.xml',

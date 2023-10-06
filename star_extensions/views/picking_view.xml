@@ -10,8 +10,13 @@
         <field name="arch" type="xml">
             <field name="origin" position="after">
                 <field name="p_o_ref" readonly="1" attrs="{'invisible': [('p_o_ref', '=',False)]}"/>
-            </field>
-        
+                <field name="is_hide_return" invisible="1"/>
+            </field>    
+
+            <xpath expr="//button[@name='412']" position="replace">
+                <button name="412" string="Return" attrs="{'invisible': ['|',('state','!=', 'done'),('is_hide_return','=',True)]}" type="action" data-hotkey="k" modifiers="{'invisible': ['|',('state','!=', 'done'),('is_hide_return','=',True)]}"/>
+            </xpath>
+
         </field>
     </record>
 
