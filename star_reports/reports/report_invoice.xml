@@ -15,7 +15,7 @@
 
 
                 <h4>
-                    <strong><span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span></strong>
+                    <strong><span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">VAT Invoice</span></strong>
                     <strong><span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoices</span></strong>
                     <strong><span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span></strong>
                     <strong><span t-if="o.move_type == 'out_refund'">Credit Note</span></strong>
