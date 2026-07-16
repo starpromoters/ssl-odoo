@@ -3,7 +3,6 @@ from odoo import api, fields, models, SUPERUSER_ID, _
 import logging
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import AccessError, UserError, ValidationError
-from lxml import etree
 
 
 
@@ -15,15 +14,12 @@ class SaleOrder(models.Model):
     p_o_ref = fields.Char(string='Purchase Order Ref')
 
     @api.model
-    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
-        res = super(SaleOrder, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
-        if view_type == 'form':
-            doc = etree.XML(res['arch'])
-            for node in doc.xpath("//field[@name='p_o_ref']"):
-                if self.env.company.id == 7:
-                    node.set('string', 'AR')
-            res['arch'] = etree.tostring(doc, encoding='unicode')
-        return res
+    def _get_view(self, view_id=None, view_type='form', **options):
+        arch, view = super()._get_view(view_id=view_id, view_type=view_type, **options)
+        if view_type == 'form' and self.env.company.id == 7:
+            for node in arch.xpath("//field[@name='p_o_ref']"):
+                node.set('string', 'AR')
+        return arch, view
     
     def action_confirm(self):
         if not self.p_o_ref:

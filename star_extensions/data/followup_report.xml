@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add a 'Po Reference' column to the on-screen Accounting Follow-up report.
+         The value is provided by the SQL injected in
+         account.followup.report.handler._get_additional_column_aml_values. -->
+    <record id="followup_report_po_ref" model="account.report.column">
+        <field name="name">Po Reference</field>
+        <field name="expression_label">p_o_ref</field>
+        <field name="figure_type">string</field>
+        <field name="sequence">35</field>
+        <field name="report_id" ref="account_reports.followup_report"/>
+    </record>
+</odoo>
