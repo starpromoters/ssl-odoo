@@ -1,6 +1,6 @@
 {
     'name': 'Star-Reports',
-    'version': '15.0.1',
+    'version': '19.0.1.0.1',
     'category': '',
     'summary': 'Star-Reports',
     

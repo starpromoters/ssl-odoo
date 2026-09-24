@@ -10,42 +10,18 @@ class Picking(models.Model):
     def _compute_is_hide_return(self):
         for record in self:
             record.is_hide_return = False
-            print(self.env.user.has_group('star_extensions.group_main_domestic_user'))
-            if record.picking_type_id.code =='outgoing' and self.env.user.has_group('star_extensions.group_main_domestic_user'):
+            if record.picking_type_id.code == 'outgoing' and self.env.user.has_group('star_extensions.group_main_domestic_user'):
                 record.is_hide_return = True
 
 
     p_o_ref = fields.Char(string='Purchase Order Ref')
     is_hide_return = fields.Boolean(string="Is Hide Return",compute='_compute_is_hide_return')
 
-    def _create_backorder(self):
-        """ This method is called when the user chose to create a backorder. It will create a new
-        picking, the backorder, and move the stock.moves that are not `done` or `cancel` into it.
-        """
-        backorders = self.env['stock.picking']
-        bo_to_assign = self.env['stock.picking']
-        for picking in self:
-            moves_to_backorder = picking.move_lines.filtered(lambda x: x.state not in ('done', 'cancel'))
-            if moves_to_backorder:
-                backorder_picking = picking.copy({
-                    'name': '/',
-                    'move_lines': [],
-                    'move_line_ids': [],
-                    'backorder_id': picking.id,
-                    'p_o_ref':picking.p_o_ref,
-                })
-                picking.message_post(
-                    body=_('The backorder <a href=# data-oe-model=stock.picking data-oe-id=%d>%s</a> has been created.') % (
-                        backorder_picking.id, backorder_picking.name))
-                moves_to_backorder.write({'picking_id': backorder_picking.id})
-                moves_to_backorder.move_line_ids.package_level_id.write({'picking_id':backorder_picking.id})
-                moves_to_backorder.mapped('move_line_ids').write({'picking_id': backorder_picking.id})
-                backorders |= backorder_picking
-                if backorder_picking.picking_type_id.reservation_method == 'at_confirm':
-                    bo_to_assign |= backorder_picking
-        if bo_to_assign:
-            bo_to_assign.action_assign()
-        return backorders
+    def _create_backorder_picking(self):
+        """ Carry the Purchase Order Ref over to the backorder picking. """
+        backorder_picking = super()._create_backorder_picking()
+        backorder_picking.p_o_ref = self.p_o_ref
+        return backorder_picking
 
 class StockMove(models.Model):
     _inherit = "stock.move"
@@ -53,7 +29,7 @@ class StockMove(models.Model):
     def _get_new_picking_values(self):
         res = super(StockMove, self)._get_new_picking_values()
         res.update({
-            'p_o_ref': self.group_id.sale_id.p_o_ref if self.group_id.sale_id and self.group_id.sale_id.p_o_ref else False
+            'p_o_ref': self.sale_line_id.order_id.p_o_ref if self.sale_line_id.order_id else False
             })
         return res
 

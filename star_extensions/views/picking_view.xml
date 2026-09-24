@@ -9,12 +9,12 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <field name="origin" position="after">
-                <field name="p_o_ref" readonly="1" attrs="{'invisible': [('p_o_ref', '=',False)]}"/>
+                <field name="p_o_ref" readonly="1" invisible="not p_o_ref"/>
                 <field name="is_hide_return" invisible="1"/>
-            </field>    
+            </field>
 
-            <xpath expr="//button[@name='412']" position="replace">
-                <button name="412" string="Return" attrs="{'invisible': ['|',('state','!=', 'done'),('is_hide_return','=',True)]}" type="action" data-hotkey="k" modifiers="{'invisible': ['|',('state','!=', 'done'),('is_hide_return','=',True)]}"/>
+            <xpath expr="//button[@name='%(stock.act_stock_return_picking)d']" position="attributes">
+                <attribute name="invisible">state != 'done' or is_hide_return</attribute>
             </xpath>
 
         </field>
