@@ -27,7 +27,15 @@
             <field name="binding_model_id" ref="account.model_account_move"/>
             <field name="binding_type">report</field>
         </record>
+
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="report_name">star_reports.report_invoice_with_payments_inherit</field>
+            <field name="report_file">star_reports.report_invoice_with_payments_inherit</field>
+        </record>
+
+        <record id="account.account_invoices_without_payment" model="ir.actions.report">
+            <field name="report_name">star_reports.report_invoice_inherit</field>
+            <field name="report_file">star_reports.report_invoice_inherit</field>
+        </record>
     </data>
 </odoo>
-
-
