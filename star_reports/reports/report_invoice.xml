@@ -269,6 +269,25 @@
             </t>
         </template>
 
+        <template id="report_invoice_document_no_taxx_label" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='partner_vat_address_same_as_shipping']" position="replace">
+                <div t-if="o.partner_id.vat" id="partner_vat_address_same_as_shipping">
+                    <t t-set="p_vat" t-value="o.partner_id.vat.strip()"/>
+                    VAT: <t t-esc="p_vat[3:].strip() if p_vat.upper().startswith('VAT') else p_vat"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@id='partner_vat_address_same_as_shipping']" position="before">
+                <div t-if="o.partner_id.brn">
+                    BRN: <span t-field="o.partner_id.brn"/>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="external_layout_standard_inherit_no_tax" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div[@name='company_address']/ul[@name='company_address_list']/li[@t-if='not forced_vat']/t[@t-if='company.vat']"
+                   position="replace"/>
+        </template>
+
         <template id="report_invoice_inherit">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
