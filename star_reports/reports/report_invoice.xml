@@ -51,31 +51,31 @@
 
                 <table  class="table" style="table-layout:auto" >
                     <tr>
-                        <td colspan="6">
-                            <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_date" name="invoice_date">
+                        <td colspan="6" style="width:50%;">
+                            <div class="mb-2" style="width:100%; white-space:nowrap;" t-if="o.invoice_date" name="invoice_date">
                                 <strong>Invoice Date:</strong>
                                 <p class="m-0" t-field="o.invoice_date"/>
                             </div>
-                            <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
+                            <div class="mb-2" style="width:100%; white-space:nowrap;" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
                                 <strong>Due Date:</strong>
                                 <p class="m-0" t-field="o.invoice_date_due"/>
                             </div>
                             
                         </td>
-                        <td colspan="6" >
-                            <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_origin" name="origin">
+                        <td colspan="6" style="width:50%;">
+                            <div class="mb-2" style="width:100%; white-space:nowrap;" t-if="o.invoice_origin" name="origin">
                                 <strong>Source:</strong>
                                 <p class="m-0" t-field="o.invoice_origin"/>
-                            </div>   
-                            <div class="col-auto col-3 mw-100 mb-2" t-if="o.p_o_ref" name="p_o_ref">
+                            </div>
+                            <div class="mb-2" style="width:100%; white-space:nowrap;" t-if="o.p_o_ref" name="p_o_ref">
                                 <strong>Purchase Order Ref:</strong>
                                 <p class="m-0" t-field="o.p_o_ref"/>
-                            </div> 
-                            <div class="col-auto col-3 mw-100 mb-2" t-if="o.partner_id.ref" name="customer_code">
+                            </div>
+                            <div class="mb-2" style="width:100%; white-space:nowrap;" t-if="o.partner_id.ref" name="customer_code">
                                 <strong>Customer Code:</strong>
                                 <p class="m-0" t-field="o.partner_id.ref"/>
                             </div>
-                            <div class="col-auto col-3 mw-100 mb-2" t-if="o.ref" name="reference">
+                            <div class="mb-2" style="width:100%; white-space:nowrap;" t-if="o.ref" name="reference">
                                 <strong>Reference:</strong>
                                 <p class="m-0" t-field="o.ref"/>
                             </div>
@@ -122,15 +122,15 @@
                     <table class="table table-sm o_main_table" name="invoice_line_table">
                         <thead>
                             <tr>
-                                <th name="th_description" class="text-start"><span>Item Code</span></th>
-                                <th name="th_description" class="text-start"><span>Description</span></th>
-                                <th name="th_quantity" class="text-center"><span>Quantity</span></th>
-                                <th name="th_priceunit" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
-                                <th name="th_price_unit" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                <th name="th_description" class="text-start" style="color:#82BC43;font-weight:bold"><span>Item Code</span></th>
+                                <th name="th_description" class="text-start" style="color:#82BC43;font-weight:bold"><span>Description</span></th>
+                                <th name="th_quantity" class="text-center" style="color:#82BC43;font-weight:bold"><span>Quantity</span></th>
+                                <th name="th_priceunit" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="color:#82BC43;font-weight:bold"><span>Unit Price</span></th>
+                                <th name="th_price_unit" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="color:#82BC43;font-weight:bold">
                                     <span>Disc.%</span>
                                 </th>
-                                <th name="th_taxes" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
-                                <th name="th_subtotal" class="text-center">
+                                <th name="th_taxes" t-attf-class="text-center {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="color:#82BC43;font-weight:bold"><span>Taxes</span></th>
+                                <th name="th_subtotal" class="text-center" style="color:#82BC43;font-weight:bold">
                                     <span t-if="o.company_price_include == 'tax_excluded'">Amount</span>
                                     <span t-else="">Total Price</span>
                                 </th>
@@ -262,7 +262,7 @@
                             <div class="oe_structure"/>
                             <!-- <p t-field="o.company_id.invoice_terms_cond"/> -->
                             <span t-out="o.company_id.invoice_terms_cond"/>
-                            
+
                         </td>
                     </tr>
                 </table>
@@ -286,6 +286,17 @@
         <template id="external_layout_standard_inherit_no_tax" inherit_id="web.external_layout_boxed">
             <xpath expr="//div[@name='company_address']/ul[@name='company_address_list']/li[@t-if='not forced_vat']/t[@t-if='company.vat']"
                    position="replace"/>
+        </template>
+
+        <template id="external_layout_boxed_footer_star" inherit_id="web.external_layout_boxed">
+            <xpath expr="//div[hasclass('o_footer_content')]" position="replace">
+                <div class="o_footer_content text-center pt-2" style="border-top: 3px solid black;">
+                    <div t-field="company.report_footer"/>
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </xpath>
         </template>
 
         <template id="report_invoice_inherit">
